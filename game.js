@@ -26,6 +26,7 @@ var outOfPower = false;
 
 var angleTo = 0;
 var lastLevel = false;
+var timer;
 
 function preload() {
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
@@ -43,12 +44,28 @@ function preload() {
     game.load.image('leftSpike', 'assets/leftSpike.png');
     game.load.image('rightSpike', 'assets/rightSpike.png');
     game.load.image('gear', 'assets/gear.png');
-    game.load.image('powerMeter', 'assets/powerMeter.png');
+    game.load.image('powerMeter', 'assets/powerMeter3.png');
     game.load.image("floatingBlockThin", "assets/floatingBlockThin.png");
     width = game.width;
     height = game.height;
     lvl = 0;
+    loadLoop("track1","track1");
+    loadLoop("track2","track2");
+    loadLoop("track3","track3");
+    loadLoop("track4","track4");
+    loadLoop("track5","track5");
     //lvl = 17;
+}
+var track1, track2, track3, track4, track5;
+var music, currentTrack;
+function loadLoop(key, file) {	
+	if (game.device.iOS || game.device.macOS) {
+		game.load.audio(key, ['assets/' + file + '.m4a']);	
+	} else {		
+		// Firefox and Chrome will use OGG		
+		// IE11 will fall back to MP3, which will have a small gap at the end before replaying		
+		game.load.audio(key, ['assets/' + file + '.ogg', 'assets/' + file + '.mp3']);	
+	}
 }
 function create() {
     game.stage.backgroundColor = '#d1cda6';
@@ -56,6 +73,17 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     //game.physics.arcade.gravity.y = 100;
     
+    
+    track1 = game.add.audio('track1');
+    track2 = game.add.audio('track2');
+    track3 = game.add.audio('track3');
+    track4 = game.add.audio('track4');
+    track5 = game.add.audio('track5');
+    music=[track1,track2,track4,track3,track5];
+    //music.loopFull();
+    //music.play();
+    
+    timer = game.time.create(false);
     
     //player.body.collideWorldBounds=true;
 
@@ -70,15 +98,6 @@ function create() {
     blocks = game.add.group();
 
     map = levelData[lvl].map;
-    /*levelText = game.add.text(width/2,height/2+map.length*BLOCK_SIZE/2+50, "L E V E L  "+(lvl+1), {
-        font: "35px monospace",
-        fill: "#2a2e43",
-        align: "center",
-        fontWeight: "bold",
-        stroke: "#2a2e43",
-        strokeThickness : 4,
-    });
-    levelText.anchor.setTo(0.5,0.5);*/
     helperText = game.add.text(width/2,height/2+(map.length-0.9)*BLOCK_SIZE/2, levelData[lvl].message, {
         font: "13px monospace",
         fill: "#d1cda6",
@@ -98,7 +117,7 @@ function create() {
     
     restartHelpText = game.add.text(game.world.centerX, height/2+map.length*BLOCK_SIZE/2+53, "Press here to restart a level", {
         font: "13px monospace",
-        fill: "#d1cda6",
+        fill: "#bab79a",
         align: "center",
         fontWeight: "bold",
     });
@@ -120,8 +139,7 @@ function create() {
     game.physics.enable(player, Phaser.Physics.ARCADE);
     player.anchor.set(0.5,0.5);
     player.body.gravity.y = 900;
-    
-    
+  
     if(levelData[lvl].startX) {
         player.x=width/2+levelData[lvl].startX;
     } else {
@@ -163,10 +181,24 @@ function create() {
     gameOverSubtitleText.anchor.setTo(0.5, 0.5);
     gameOverText.alpha=0;
     gameOverSubtitleText.alpha=0;
+    
+    game.sound.setDecodedCallback(music, startMusic, this);
 }
-/*function showAimDots() {
-    aimDots.alpha+=()
-}*/
+
+function startMusic() {
+    music.shift();
+    track1.loopFull();
+    currentTrack=track1;
+    //track1.onLoop.add(nextMusic,this);
+}
+
+function nextMusic() {
+    currentTrack.stop();
+    music[0].loopFull();
+    currentTrack=music[0];
+    music.shift();
+}
+
 function checkBlock(player, block) {
     var blockName = block.name;
     if(blockName=="danger") {
@@ -399,6 +431,11 @@ function nextLevel() {
 }
 
 function loadNextLevel() {
+    if(music.length>=1) {
+        if((lvl+1)%5==0) {
+            nextMusic();
+        }
+    }
     if(lvl+1<levelData.length) {
         loadLevel(lvl+1);
         lvl++;

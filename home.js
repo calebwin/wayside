@@ -19,7 +19,6 @@ function preload() {
     game.load.image('spike', 'assets/spike.png');
     game.load.image('gear', 'assets/gear.png');
     game.load.image('playBtn', 'assets/playBtn.png');
-    game.load.audio('bMusic', ["assets/bMusic1.ogg"]);
     width = game.width;
     height = game.height;
 }
@@ -27,8 +26,6 @@ function create() {
     game.stage.backgroundColor = '#d1cda6';
     game.world.setBounds(0, 0, width, height);
     //game.physics.startSystem(Phaser.Physics.ARCADE);
-    music = game.add.audio('bMusic',1,true);
-    music.play();
     
     titleText = game.add.text(game.world.centerX, game.world.centerY-80, "WAYSIDE", {
         font: "155px monospace",
