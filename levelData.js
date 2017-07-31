@@ -217,7 +217,7 @@ var levelData = [
             [1,1,1,1,1,1,1,1,1,1,1,1],
         ],
         message : "Sometimes I wonder",
-        powerStep : 0.25, // by how much to decrease power every jump
+        powerStep : 0.2, // by how much to decrease power every jump
         startX : -240
     },
     {
