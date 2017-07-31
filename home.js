@@ -19,8 +19,23 @@ function preload() {
     game.load.image('spike', 'assets/spike.png');
     game.load.image('gear', 'assets/gear.png');
     game.load.image('playBtn', 'assets/playBtn.png');
+    loadLoop("track1","track1");
+    loadLoop("track2","track2");
+    loadLoop("track3","track3");
+    loadLoop("track4","track4");
+    loadLoop("track5","track5");
     width = game.width;
     height = game.height;
+}
+
+function loadLoop(key, file) {	
+	if (game.device.iOS || game.device.macOS) {
+		game.load.audio(key, ['assets/' + file + '.m4a']);	
+	} else {		
+		// Firefox and Chrome will use OGG		
+		// IE11 will fall back to MP3, which will have a small gap at the end before replaying		
+		game.load.audio(key, ['assets/' + file + '.ogg', 'assets/' + file + '.mp3']);	
+	}
 }
 function create() {
     game.stage.backgroundColor = '#d1cda6';
