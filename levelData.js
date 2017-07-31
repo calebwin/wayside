@@ -124,7 +124,7 @@ var levelData = [
             [1,1,1,1,1,1,1,1,1,1,1,1],
         ],
         message : "Not really",
-        powerStep : 0.5, // by how much to decrease power every jump
+        powerStep : 0.33, // by how much to decrease power every jump
         startX : -220
     },
     {
