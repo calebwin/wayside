@@ -1,7 +1,6 @@
 var gameState = {preload: preload, create: create, update: update};
 
 var debugText;
-var width, height;
 var SCALE = 1;
 var A_TO_R = Math.PI/180;
 
@@ -29,25 +28,19 @@ var lastLevel = false;
 var timer;
 
 function preload() {
-    game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-    game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
+    loadingBar = this.add.sprite(0,0,"block");
+    loadingBar.scale.setTo(width/500,0.1);
+    this.load.setPreloadSprite(loadingBar,0);
     game.load.image('plants1', 'assets/plants1.png');
     game.load.image('plants2', 'assets/plants2.png');
     game.load.image('plants3', 'assets/plants3.png');
     game.load.image('plants4', 'assets/plants4.png');
     game.load.image('plants5', 'assets/plants5.png');
-    game.load.image('player', 'assets/player.png');
-    game.load.image('block', 'assets/block.png');
-    game.load.image('spike', 'assets/spike.png');
     game.load.image('downSpike', 'assets/downSpike.png');
     game.load.image('leftSpike', 'assets/leftSpike.png');
     game.load.image('rightSpike', 'assets/rightSpike.png');
-    game.load.image('gear', 'assets/gear.png');
     game.load.image('powerMeter', 'assets/powerMeter3.png');
     game.load.image("floatingBlockThin", "assets/floatingBlockThin.png");
-    width = game.width;
-    height = game.height;
     lvl = 0;
     loadLoop("track1","track1");
     loadLoop("track2","track2");
@@ -213,6 +206,7 @@ function checkBlock(player, block) {
 }
 var helperTextAlphaTo = 1;
 function update() {
+    loadingBar.alpha+=(0-loadingBar.alpha)/5;
     //if(angleTo<player.angle)
     //player.angle+=((angleTo%360)-180-player.angle)/10;
     if(game.input.activePointer.isDown) {

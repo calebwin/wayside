@@ -10,7 +10,12 @@ var titleText, subtitleText;
 var playBtn;
 var music;
 
+var loadingBar;
+
 function preload() {
+    loadingBar = this.add.sprite(0,0,"block");
+    loadingBar.scale.setTo(width/500,0.1);
+    this.load.setPreloadSprite(loadingBar,0);
     game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
@@ -19,23 +24,8 @@ function preload() {
     game.load.image('spike', 'assets/spike.png');
     game.load.image('gear', 'assets/gear.png');
     game.load.image('playBtn', 'assets/playBtn.png');
-    loadLoop("track1","track1");
-    loadLoop("track2","track2");
-    loadLoop("track3","track3");
-    loadLoop("track4","track4");
-    loadLoop("track5","track5");
     width = game.width;
     height = game.height;
-}
-
-function loadLoop(key, file) {	
-	if (game.device.iOS || game.device.macOS) {
-		game.load.audio(key, ['assets/' + file + '.m4a']);	
-	} else {		
-		// Firefox and Chrome will use OGG		
-		// IE11 will fall back to MP3, which will have a small gap at the end before replaying		
-		game.load.audio(key, ['assets/' + file + '.ogg', 'assets/' + file + '.mp3']);	
-	}
 }
 function create() {
     game.stage.backgroundColor = '#d1cda6';
@@ -65,6 +55,7 @@ function create() {
     playBtn.anchor.setTo(0.5,0.5);
 }
 function update() {
+    loadingBar.alpha+=(0-loadingBar.alpha)/5;
 }
 function openGame() {
     game.state.start("game");
