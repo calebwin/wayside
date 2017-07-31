@@ -42,6 +42,9 @@ function preload() {
     game.load.image('powerMeter', 'assets/powerMeter3.png');
     game.load.image("floatingBlockThin", "assets/floatingBlockThin.png");
     lvl = 0;
+    if(localStorage.getItem('currentLevelWaysideGame')) {
+        lvl = localStorage.getItem('currentLevelWaysideGame');
+    }
     loadLoop("track1","track1");
     loadLoop("track2","track2");
     loadLoop("track3","track3");
@@ -433,6 +436,7 @@ function loadNextLevel() {
     if(lvl+1<levelData.length) {
         loadLevel(lvl+1);
         lvl++;
+	localStorage.setItem('currentLevelWaysideGame', lvl);
         if(lvl+2>levelData.length&&!lastLevel) {
             lastLevel=true;
         }
