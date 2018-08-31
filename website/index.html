@@ -1,0 +1,111 @@
+<!DOCTYPE html>  
+<html>
+    <head>  
+        <meta charset="utf-8" />
+        <title>Outback</title>
+        <link rel="stylesheet" type="text/css" href="normalize.css" />
+        <link rel="stylesheet" type="text/css" href="skeleton.css" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:900" rel="stylesheet">
+    </head>
+    
+    <style>
+        ::selection {
+          background: #ffb7b7; /* WebKit/Blink Browsers */
+        }
+        ::-moz-selection {
+          background: #ffb7b7; /* Gecko Browsers */
+        }
+        body {
+            background-color: #d1cda6;
+            font-family: 'Merriweather', serif;
+            color : #2a2e43;
+        }
+        .pageTitle {
+            font-size : 13vw;
+            color : #2a2e43;
+            font-weight:900;
+            text-align: center;
+            margin-top:10vh;
+        }
+        .subtitle {
+            font-size : 2vw;
+            color : #2a2e43;
+            font-weight:bolder;
+            text-align: center;
+            transform:translateY(-3vw);
+            -webkit-transform:translateY(-3vw);
+            -ms-transform:translateY(-3vw);
+        }
+        .pageContent {
+            margin-top: -2vh;
+        }
+        img {
+            box-shadow: 0px 0px 5px 0px #2a2e43;
+            transition: all .2s ease-in-out;
+        }
+        img:hover {
+            box-shadow: 0px 0px 20px 0px #2a2e43;
+            transform: scale(1.01,1.01);
+        }
+        hr {
+            border: 2px #a39f82 solid;
+        }
+        i {
+        }
+        .buttonSet {
+        }
+        .button {
+            background-color: #2a2e43;
+            color: #d1cda6;
+            border:none;
+            transition: all .2s ease-in-out;
+        }
+        .button:hover { 
+            background-color: #2a2e43;
+            color: #d1cda6;
+            -webkit-transform: scale(1.03); 
+            -ms-transform: scale(1.03); 
+            transform: scale(1.03); 
+        }
+    </style>
+
+    <body>
+        <div class="container">
+            <h1 class="pageTitle">OUTBACK</h1>
+            <h1 class="subtitle">A little robot's journey in search of an end</h1>
+            <!--<div class="row"><hr/></div>-->
+            <div class="container pageContent">
+                <div class="row">
+                    <div class="one-third column">
+                        <img src="outbackShot1.png" />
+                    </div>
+                    <div class="one-third column">
+                        <img src="outbackShot2.png" />
+                    </div>
+                    <div class="one-third column">
+                        <img src="outbackShot3.png" />
+                    </div>
+                </div>
+                <hr/>
+                <h3>A world awaits you...</h3>
+                <p>Outback is a modern platformer where you guide a robot through 50+ beautifully designed landscapes. Designed specifically for mobile devices, the controls are far simpler than pretty much every other mobile platform game: Just drag to aim. Then release to jump. Beautiful and intuitive, Outback is unlike any other of its kind.</p>
+                
+                <h3>How it began...</h3>
+                <p>Outback's initial prototype was built in 48 hours for the 39th Ludum Dare. Recieving 100+ postive reviews from professionals in the game developement industry, in less than a week, the game became one of the jam's most popular entries.
+                <!--<br/><a class="button downloadButton">See the LD39 entry</a></p>-->
+                
+                <h3>The game itself.</h3>
+                <p>Outback is currently available for free on the Google Play Store, the iOS App Store, and the Amazon Appstore. Known issues related to performance do exist on some devices. If you have any feedback, be sure to let us know by contacting us or writing a review.
+                <div class="buttonSet">
+                    <a href="https://play.google.com/store/apps/details?id=com.thecodefactory.outback" class="button downloadButton" >Download on Google Play</a><br/>
+                    <a href="https://www.amazon.com/dp/B074RT3NY5/" class="button downloadButton" >Download on Amazon Appstore</a><br/>
+                    <a href="https://itunes.apple.com/us/app/outback-the-game/id1271182756?mt=8" class="button downloadButton" >Download on Apple App Store</a><br/>
+                    <a class="button downloadButton" href="outback-press-kit.zip" download="outback-press-kit">Download the press kit</a>
+                </div>
+                <!--<br/><a class="button">Play the browe</a>--></p>
+            </div>
+        </div>
+    </body>  
+    <script>
+    </script>
+</html>  
